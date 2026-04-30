@@ -1,0 +1,18 @@
+//
+//  Item.swift
+//  Habittrackerxcode
+//
+//  Created by Pinar Bildirici on 2026-04-30.
+//
+
+import Foundation
+import SwiftData
+
+@Model
+final class Habit{
+    var timestamp: Date
+    
+    init(timestamp: Date) {
+        self.timestamp = timestamp
+    }
+}
