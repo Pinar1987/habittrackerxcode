@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		01B72E2D2FA407C2007A4E2A /* HabittrackerxcodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B72E2C2FA407C2007A4E2A /* HabittrackerxcodeApp.swift */; };
 		01B72E2F2FA407C2007A4E2A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B72E2E2FA407C2007A4E2A /* ContentView.swift */; };
-		01B72E312FA407C2007A4E2A /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B72E302FA407C2007A4E2A /* Habit.swift */; };
+		01B72E312FA407C2007A4E2A /* habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B72E302FA407C2007A4E2A /* habit.swift */; };
 		01B72E332FA407C4007A4E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B72E322FA407C4007A4E2A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +34,7 @@
 		01B72E292FA407C2007A4E2A /* Habittrackerxcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habittrackerxcode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B72E2C2FA407C2007A4E2A /* HabittrackerxcodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabittrackerxcodeApp.swift; sourceTree = "<group>"; };
 		01B72E2E2FA407C2007A4E2A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		01B72E302FA407C2007A4E2A /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		01B72E302FA407C2007A4E2A /* habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = habit.swift; sourceTree = "<group>"; };
 		01B72E322FA407C4007A4E2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B72E382FA407C4007A4E2A /* HabittrackerxcodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabittrackerxcodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B72E422FA407C4007A4E2A /* HabittrackerxcodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabittrackerxcodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +110,7 @@
 		01B72E552FA40B25007A4E2A /* Models  */ = {
 			isa = PBXGroup;
 			children = (
-				01B72E302FA407C2007A4E2A /* Habit.swift */,
+				01B72E302FA407C2007A4E2A /* habit.swift */,
 			);
 			path = "Models ";
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01B72E2F2FA407C2007A4E2A /* ContentView.swift in Sources */,
-				01B72E312FA407C2007A4E2A /* Habit.swift in Sources */,
+				01B72E312FA407C2007A4E2A /* habit.swift in Sources */,
 				01B72E2D2FA407C2007A4E2A /* HabittrackerxcodeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
