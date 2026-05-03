@@ -39,16 +39,10 @@
 		01B72E322FA407C4007A4E2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B72E382FA407C4007A4E2A /* HabittrackerxcodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabittrackerxcodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B72E422FA407C4007A4E2A /* HabittrackerxcodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabittrackerxcodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		01F37B112FA6B331003CB9A3 /* AddHabitView.swift. */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddHabitView.swift.; sourceTree = "<group>"; };
 		01F37B122FA6B3CB003CB9A3 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		01B72E2B2FA407C2007A4E2A /* Habittrackerxcode */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Habittrackerxcode;
-			sourceTree = "<group>";
-		};
 		01B72E3B2FA407C4007A4E2A /* HabittrackerxcodeTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HabittrackerxcodeTests;
@@ -90,10 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				01B72E582FA40C72007A4E2A /* App */,
-				01B72E572FA40B95007A4E2A /* ViewModels */,
 				01B72E562FA40B86007A4E2A /* Views */,
 				01B72E552FA40B25007A4E2A /* Models  */,
-				01B72E2B2FA407C2007A4E2A /* Habittrackerxcode */,
 				01B72E3B2FA407C4007A4E2A /* HabittrackerxcodeTests */,
 				01B72E452FA407C4007A4E2A /* HabittrackerxcodeUITests */,
 				01B72E2A2FA407C2007A4E2A /* Products */,
@@ -121,18 +113,10 @@
 		01B72E562FA40B86007A4E2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01F37B112FA6B331003CB9A3 /* AddHabitView.swift. */,
 				01B72E2E2FA407C2007A4E2A /* ContentView.swift */,
 				01F37B122FA6B3CB003CB9A3 /* AddHabitView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		01B72E572FA40B95007A4E2A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		01B72E582FA40C72007A4E2A /* App */ = {
@@ -158,9 +142,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				01B72E2B2FA407C2007A4E2A /* Habittrackerxcode */,
 			);
 			name = Habittrackerxcode;
 			packageProductDependencies = (
