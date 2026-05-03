@@ -80,9 +80,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01AE03992FA7FF4A00BF3AAD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		01AE039A2FA7FF6800BF3AAD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		01B72E202FA407C1007A4E2A = {
 			isa = PBXGroup;
 			children = (
+				01AE039A2FA7FF6800BF3AAD /* Resources */,
+				01AE03992FA7FF4A00BF3AAD /* ViewModels */,
 				01B72E582FA40C72007A4E2A /* App */,
 				01B72E562FA40B86007A4E2A /* Views */,
 				01B72E552FA40B25007A4E2A /* Models  */,
