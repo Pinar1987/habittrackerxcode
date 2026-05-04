@@ -15,6 +15,10 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
+                Group {
+            if habits.isEmpty {
+                ContentUnavailableView("No Habits Yet", systemImage: "figure.walk", description: Text("Start your journey by adding a new habit!"))
+                        } else {
             List {
                 ForEach(habits) { item in
                     VStack(alignment: .leading) {
@@ -28,15 +32,18 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteItems)
-            }
-            .navigationTitle("Habit Tracker")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: { showingAddSheet = true }) {
-                        Label("Add Habit", systemImage: "plus")
                     }
                 }
-                
+        
+             }
+                .navigationTitle("Habit Tracker")
+                .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: { showingAddSheet = true }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            
                 #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
@@ -46,8 +53,8 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddSheet) {
                 AddHabitView()
             }
-        } 
-    }
+        }
+     }
 
     private func deleteItems(offsets: IndexSet) {
         for index in offsets {
@@ -55,4 +62,7 @@ struct ContentView: View {
         }
     }
 }
+
+
+
 
