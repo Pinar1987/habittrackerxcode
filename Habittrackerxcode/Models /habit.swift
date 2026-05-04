@@ -13,7 +13,7 @@ final class habit {
     var name: String
     var notes: String
     var timestamp: Date
-    var completedDates: [Date] = [] 
+    var completedDates: [Date] = []
     
              
        
