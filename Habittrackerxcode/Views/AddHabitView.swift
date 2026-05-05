@@ -9,6 +9,9 @@ struct AddHabitView: View {
     @State private var notes = ""
     @State private var showAlert = false
     @State private var errorMessage = ""
+    @State private var selectedColor = Color.blue
+    @State private var reminderTime = Date()
+    @State private var isReminderEnabled = true
     
     var body: some View {
         NavigationStack {
@@ -16,15 +19,15 @@ struct AddHabitView: View {
                 Section("Habit Details") {
                     TextField("Habit Name", text: $name)
                     TextField("Notes (Optional)", text: $notes)
+                    ColorPicker("Bir Renk Seç", selection: $selectedColor, supportsOpacity: false)
+                        .padding(.vertical, 8)
                 }
             }
             .navigationTitle("New Habit")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let newHabit = habit(name: name, notes: notes)
-                        modelContext.insert(newHabit)
-                        dismiss()
+                        saveHabit()
                     }
                     .disabled(name.isEmpty)
                 }
@@ -41,20 +44,36 @@ struct AddHabitView: View {
             }
         }
     }
+    
     private func saveHabit() {
-        
         if name.trimmingCharacters(in: .whitespaces).isEmpty {
             errorMessage = "please write your habit name!"
             showAlert = true
         } else {
-            // save the habit to the database
-            let newHabit = habit(name: name, notes: notes)
+        
+            let hexString = selectedColor.toHex() ?? "#3498db"
+            
+            let newHabit = habit(
+                name: name,
+                notes: notes,
+                timestamp: Date(),
+                hexColor: hexString
+            )
+            
             modelContext.insert(newHabit)
-            
-            // notifications are scheduled when the habit is created
-            NotificationManager.instance.scheduleNotification(habitName: name)
-            
+            NotificationManager.instance.scheduleNotification(habitName: name, at: reminderTime)
             dismiss()
         }
+    }
+}
+
+extension Color {
+    func toHex() -> String? {
+        let uic = UIColor(self)
+        guard let components = uic.cgColor.components, components.count >= 3 else { return nil }
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        return String(format: "#%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
     }
 }
