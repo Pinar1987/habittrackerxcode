@@ -10,7 +10,13 @@ import SwiftData
 
 @main
 struct HabittrackerxcodeApp: App {
+    
+    init() {
+            NotificationManager.instance.requestAuthorization()
+        }
+
     var sharedModelContainer: ModelContainer = {
+        
         let schema = Schema([
         habit.self,
         ])
