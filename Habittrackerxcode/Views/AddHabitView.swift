@@ -11,7 +11,10 @@ struct AddHabitView: View {
     @State private var errorMessage = ""
     @State private var selectedColor = Color.blue
     @State private var reminderTime = Date()
-    @State private var isReminderEnabled = false 
+    @State private var isReminderEnabled = false
+    @State private var targetDays: Int = 5
+   
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -23,6 +26,21 @@ struct AddHabitView: View {
                         DatePicker("Choose Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
                     }
                 }
+                
+                Section(header: Text("Challenge Goal")) {
+                    Picker("Target Days", selection: $targetDays) {
+                        Text("5 Days").tag(5)
+                        Text("10 Days").tag(10)
+                        Text("30 Days").tag(30)
+                        Text("100 Days").tag(100)
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    Text("Goal: Maintain this habit for \(targetDays) days to complete the challenge!")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                    
                 
                 Section("Habit Details") {
                     TextField("Habit Name", text: $name)
