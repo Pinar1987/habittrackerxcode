@@ -8,19 +8,18 @@ final class habit {
     var timestamp: Date
     var completedDates: [Date] = []
     var hexColor: String = "#3498db"
+    var targetDays: Int
     
     init(name: String = "", notes: String = "", timestamp: Date = .now, hexColor: String = "#3498db", targetDays: Int = 5 ) {
         self.name = name
         self.notes = notes
         self.timestamp = timestamp
-        self.completedDates = []
         self.hexColor = hexColor
         self.targetDays = targetDays
+        self.completedDates = []
         
     }
     
-    
-    var targetDays: Int = 5
    
     
     // Streak//

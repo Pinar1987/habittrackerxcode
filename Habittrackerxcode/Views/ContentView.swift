@@ -10,7 +10,7 @@ struct ContentView: View {
         NavigationStack {
             Group {
                 if habits.isEmpty {
-                    // Uygulama boşken gösterilen ekran
+                
                     ContentUnavailableView {
                         Label("No Habits Yet", systemImage: "figure.walk.circle.fill")
                     } description: {
@@ -55,7 +55,7 @@ struct ContentView: View {
                                             .foregroundColor(item.currentStreak > 0 ? .orange : .gray)
                                         
                                      
-                                        Text("\(item.currentStreak) / \(item.targetDays) gün")
+                                        Text("\(item.currentStreak) / \(item.targetDays) days")
                                             .fontWeight(.medium)
                                         
                                        

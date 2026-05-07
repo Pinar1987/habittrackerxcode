@@ -12,7 +12,7 @@ struct AddHabitView: View {
     @State private var selectedColor = Color.blue
     @State private var reminderTime = Date()
     @State private var isReminderEnabled = false
-    @State private var targetDays: Int = 5
+    @State private var targetDays: Int = 1
    
     
     var body: some View {
@@ -29,8 +29,8 @@ struct AddHabitView: View {
                 
                 Section(header: Text("Challenge Goal")) {
                     Picker("Target Days", selection: $targetDays) {
+                        Text("1 Days").tag(1)
                         Text("5 Days").tag(5)
-                        Text("10 Days").tag(10)
                         Text("30 Days").tag(30)
                         Text("100 Days").tag(100)
                     }
@@ -82,7 +82,8 @@ struct AddHabitView: View {
                 name: name,
                 notes: notes,
                 timestamp: Date(),
-                hexColor: hexString
+                hexColor: hexString,
+                targetDays: targetDays
             )
             
             modelContext.insert(newHabit)
