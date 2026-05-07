@@ -10,7 +10,7 @@ struct ContentView: View {
         NavigationStack {
             Group {
                 if habits.isEmpty {
-                   
+                    // Uygulama boşken gösterilen ekran
                     ContentUnavailableView {
                         Label("No Habits Yet", systemImage: "figure.walk.circle.fill")
                     } description: {
@@ -23,27 +23,52 @@ struct ContentView: View {
                         .controlSize(.large)
                     }
                 } else {
-               
+             
                     List {
                         ForEach(habits) { item in
+                            
                            
+                            let progressRatio = Double(item.currentStreak) / Double(item.targetDays)
+                            let daysLeft = item.targetDays - item.currentStreak
+                            
                             HStack(spacing: 15) {
                                 
-                                // Process Cirkular Ring//
-                                CircularProgressView(progress: item.isCompletedToday ? 1.0 : 0.0, color: Color(hex: item.hexColor))
+                               
+                                CircularProgressView(progress: progressRatio, color: Color(hex: item.hexColor))
                                     .frame(width: 45, height: 45)
+                                    .overlay {
+                                      
+                                        if item.currentStreak >= item.targetDays {
+                                            Image(systemName: "trophy.fill")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.orange)
+                                        }
+                                    }
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(item.name)
                                         .font(.headline)
-                                     
                                         .strikethrough(item.isCompletedToday, color: .secondary)
                                     
                                     HStack(spacing: 4) {
-                                        
                                         Image(systemName: "flame.fill")
                                             .foregroundColor(item.currentStreak > 0 ? .orange : .gray)
-                                        Text("\(item.currentStreak) günlük seri")
+                                        
+                                     
+                                        Text("\(item.currentStreak) / \(item.targetDays) gün")
+                                            .fontWeight(.medium)
+                                        
+                                       
+                                        if daysLeft > 0 {
+                                            Text("(\(daysLeft) left)")
+                                                .font(.caption2)
+                                                .foregroundColor(.secondary)
+                                        } else {
+                                            Text("Goal Reached!")
+                                                .font(.caption2)
+                                                .foregroundColor(.green)
+                                                .bold()
+                                        }
                                     }
                                     .font(.caption)
                                     .foregroundColor(.secondary)
@@ -51,13 +76,13 @@ struct ContentView: View {
 
                                 Spacer()
 
-                   
+                              
                                 Button(action: {
-                                   
                                     withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                                         if !item.isCompletedToday {
+                                            
                                             item.completedDates.append(Date())
-                                     
+                                            
                                             let generator = UIImpactFeedbackGenerator(style: .medium)
                                             generator.impactOccurred()
                                         }
@@ -108,9 +133,7 @@ struct ContentView: View {
     }
 }
 
-
-
-//  (CircularProgressView) style //
+// (CircularProgressView)//
 struct CircularProgressView: View {
     let progress: Double
     let color: Color
@@ -128,7 +151,7 @@ struct CircularProgressView: View {
     }
 }
 
-// Hex color extension//
+// Hex Color //
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -154,5 +177,3 @@ extension Color {
         )
     }
 }
-
-
