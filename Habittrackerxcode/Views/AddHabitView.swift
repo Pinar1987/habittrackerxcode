@@ -11,15 +11,23 @@ struct AddHabitView: View {
     @State private var errorMessage = ""
     @State private var selectedColor = Color.blue
     @State private var reminderTime = Date()
-    @State private var isReminderEnabled = true
-    
+    @State private var isReminderEnabled = false 
     var body: some View {
         NavigationStack {
             Form {
+                Section(header: Text("Notifications")) {
+                    Toggle("Send Notification", isOn: $isReminderEnabled)
+                        .tint(.blue)
+                    
+                    if isReminderEnabled {
+                        DatePicker("Choose Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
+                    }
+                }
+                
                 Section("Habit Details") {
                     TextField("Habit Name", text: $name)
                     TextField("Notes (Optional)", text: $notes)
-                    ColorPicker("Bir Renk Seç", selection: $selectedColor, supportsOpacity: false)
+                    ColorPicker("Choose a color", selection: $selectedColor, supportsOpacity: false)
                         .padding(.vertical, 8)
                 }
             }
@@ -50,7 +58,6 @@ struct AddHabitView: View {
             errorMessage = "please write your habit name!"
             showAlert = true
         } else {
-        
             let hexString = selectedColor.toHex() ?? "#3498db"
             
             let newHabit = habit(
@@ -61,7 +68,13 @@ struct AddHabitView: View {
             )
             
             modelContext.insert(newHabit)
-            NotificationManager.instance.scheduleNotification(habitName: name, at: reminderTime)
+            
+           
+            if isReminderEnabled {
+                NotificationManager.instance.scheduleNotification(habitName: name, at: reminderTime)
+            }
+            
+           
             dismiss()
         }
     }
