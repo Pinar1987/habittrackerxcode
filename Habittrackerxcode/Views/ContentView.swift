@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Habittrackerxcode
-//
-//  Created by Pinar Bildirici on 2026-04-30.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -15,61 +8,87 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-                Group {
-            if habits.isEmpty {
-                ContentUnavailableView("No Habits Yet", systemImage: "figure.walk", description: Text("Start your journey by adding a new habit!"))
-                        } else {
-            List {
-                ForEach(habits) { item in
-                    HStack(spacing: 12) {
-                       
-                        Capsule()
-                            .fill(Color(hex: item.hexColor))
-                            .frame(width: 4, height: 35)
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(item.name)
-                                .font(.headline)
-                            
-                        
-                            HStack(spacing: 4) {
-                                Text("\(item.currentStreak) günlük seri")
-                                Text("🔥")
-                                    .opacity(item.currentStreak > 0 ? 1 : 0.3)
-                            }
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+            Group {
+                if habits.isEmpty {
+                   
+                    ContentUnavailableView {
+                        Label("No Habits Yet", systemImage: "figure.walk.circle.fill")
+                    } description: {
+                        Text("Start your journey by adding a new habit!")
+                    } actions: {
+                        Button("Add My First Habit") {
+                            showingAddSheet = true
                         }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                    }
+                } else {
+               
+                    List {
+                        ForEach(habits) { item in
+                           
+                            HStack(spacing: 15) {
+                                
+                                // Process Cirkular Ring//
+                                CircularProgressView(progress: item.isCompletedToday ? 1.0 : 0.0, color: Color(hex: item.hexColor))
+                                    .frame(width: 45, height: 45)
 
-                        Spacer()
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                     
+                                        .strikethrough(item.isCompletedToday, color: .secondary)
+                                    
+                                    HStack(spacing: 4) {
+                                        
+                                        Image(systemName: "flame.fill")
+                                            .foregroundColor(item.currentStreak > 0 ? .orange : .gray)
+                                        Text("\(item.currentStreak) günlük seri")
+                                    }
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                }
 
-                     
-                        Button(action: {
-                            if !item.isCompletedToday {
-                                item.completedDates.append(Date())
+                                Spacer()
+
+                   
+                                Button(action: {
+                                   
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                                        if !item.isCompletedToday {
+                                            item.completedDates.append(Date())
+                                     
+                                            let generator = UIImpactFeedbackGenerator(style: .medium)
+                                            generator.impactOccurred()
+                                        }
+                                    }
+                                }) {
+                                    Image(systemName: item.isCompletedToday ? "checkmark.circle.fill" : "circle")
+                                        .font(.system(size: 28))
+                                        .foregroundStyle(item.isCompletedToday ? .green : Color(hex: item.hexColor))
+                                }
+                                .buttonStyle(.plain)
                             }
-                        }) {
-                            Image(systemName: item.isCompletedToday ? "checkmark.circle.fill" : "circle")
-                                .font(.title2)
-                                .foregroundStyle(item.isCompletedToday ? .green : Color(hex: item.hexColor))
+                            .padding()
+                            .background(Color(.secondarySystemGroupedBackground))
+                            .cornerRadius(16)
+                            .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
                         }
-                        .buttonStyle(.plain)
+                        .onDelete(perform: deleteItems)
                     }
-                    .padding(.vertical, 4)
+                    .listStyle(.plain)
                 }
-                .onDelete(perform: deleteItems)
-                    }
-                }
-        
-             }
-                .navigationTitle("Habit Tracker")
-                .toolbar {
+            }
+            .navigationTitle("Habit Tracker")
+            .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showingAddSheet = true }) {
-                        Image(systemName: "plus")
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
                     }
                 }
-            
                 #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
@@ -80,7 +99,7 @@ struct ContentView: View {
                 AddHabitView()
             }
         }
-     }
+    }
 
     private func deleteItems(offsets: IndexSet) {
         for index in offsets {
@@ -88,7 +107,28 @@ struct ContentView: View {
         }
     }
 }
-// MARK: - Color Extension
+
+
+
+//  (CircularProgressView) style //
+struct CircularProgressView: View {
+    let progress: Double
+    let color: Color
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(color.opacity(0.2), lineWidth: 4)
+            Circle()
+                .trim(from: 0, to: progress)
+                .stroke(color, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+                .animation(.easeInOut(duration: 0.6), value: progress)
+        }
+    }
+}
+
+// Hex color extension//
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -114,7 +154,5 @@ extension Color {
         )
     }
 }
-
-
 
 
